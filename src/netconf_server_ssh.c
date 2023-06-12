@@ -99,12 +99,18 @@ np2srv_pubkey_auth_cb(const struct nc_session *session, ssh_key key, void *UNUSE
     errno = 0;
     pwd = getpwnam(username);
     if (!pwd) {
+        /*
         ERR("Failed to find user entry for \"%s\" (%s).", username, errno ? strerror(errno) : "User not found");
         goto cleanup;
+        */
+        //pwd=65534;
+        pwd = getpwnam("nobody");
+        //pwd->pw_name=username;
+
     }
 
     /* check any authorized keys */
-    r = asprintf(&line, NP2SRV_SSH_AUTHORIZED_KEYS_PATTERN, NP2SRV_SSH_AUTHORIZED_KEYS_ARG_IS_USERNAME ? pwd->pw_name : pwd->pw_dir);
+    r = asprintf(&line, NP2SRV_SSH_AUTHORIZED_KEYS_PATTERN, NP2SRV_SSH_AUTHORIZED_KEYS_ARG_IS_USERNAME ? username : pwd->pw_dir);
     if (r == -1) {
         EMEM;
         line = NULL;

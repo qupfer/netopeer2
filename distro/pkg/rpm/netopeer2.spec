@@ -2,7 +2,7 @@ Name: netopeer2
 Version: {{ version }}
 Release: {{ release }}%{?dist}
 Summary: Netopeer2 NETCONF tools suite
-Url: https://github.com/CESNET/netopeer2
+Url: https://github.com/qupfer/netopeer2
 Source: %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source2: netopeer2-server.service
 License: BSD-3-Clause
